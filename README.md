@@ -1,4 +1,4 @@
-# webpack-express-boilerplate
+# Super Cinema
 A simple online movies rental exercise
 
 
