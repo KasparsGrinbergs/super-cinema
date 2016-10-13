@@ -1,39 +1,33 @@
-This repo is a boilerplate for React-Babel-Webpack project. You could use it as a base to build your own web app.
+# webpack-express-boilerplate
+A simple online movies rental exercise
 
-## Features
 
-- Equip with React, ES6 & Babel 6
-- Lint with ESlint and Airbnb's style sheet.
-- Build with Webpack
-- Support [hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)
-- Auto Open a new browser tab when Webpack loads, and reload the page when you modified the code
-- Use [Commitizen](https://github.com/commitizen/cz-cli) to produce commit message according to [AngularJS convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines)
-- Support git hook `pre-commit` used to lint and test your code
-- Support git hook `commit-msg` used to lint your [commit message](https://github.com/kentcdodds/validate-commit-msg)
-- Use [conventional-changelog](https://github.com/ajoslin/conventional-changelog) to generate `CHANGELOG.md`
+## Install and Running
+`git clone https://github.com/kag17/super-cinema.git`
 
-## How to use
+or just export the files:
 
-First, you should clone the repo and install the dependencies.
+`svn export https://github.com/kag17/super-cinema/trunk ./dir`
 
-```bash
-$ git clone git@github.com:ruanyf/react-babel-webpack-boilerplate.git <yourAppName>
-$ cd <yourAppName>
-$ npm install
-```
+1. cd super-cinema
+2. npm install
+3. Start Mongo: mongod --dbpath <your_projects_folder>/super-cinema/db
+4. npm start
+5. navigate to http://localhost:3000 in your browser of choice.
 
-Then, launch the boilerplate app.
+### Prerequisites
+You must have Node.js and MongoDB installed before attempting steps above.
 
-```bash
-$ npm start
-```
 
-You should see a new browser tap opening and a title of "Hello World" in http://127.0.0.1:8080.
+## Overview
 
-From there, you start to develop your own code in the `app` directory. When you finish coding, use `npm run build` or `npm run deploy` to build the static files.
+### CSS Modules
+CSS files loaded into components are locally scoped and you can point to class names with javascript. You can also compose classes together, also from other files. These are also hot loaded. Read more about them [here](http://glenmaddern.com/articles/css-modules).
 
-When committing your code, you should use [AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). Otherwise, the repo will throw an error. If you use `npm run commit` instead of `git commit`, the command will help you to produce a formatted commit message.
+To turn off CSS Modules remove it from the `webpack.config.js` file.
 
-## License
+### Babel and Linting
+Both Node server and frontend code runs with Babel. And all of it is linted. With atom you install the `linter` package, then `linter-eslint` and `linter-jscs`. You are covered. Also run `npm run eslint` or `npm run jscs` to verify all files. I would recommend installing `language-babel` package too for syntax highlighting
 
-MIT
+### Beautify
+With a beautify package installed in your editor it will also do that

@@ -1,37 +1,47 @@
-var webpack = require('webpack');
+'use strict';
+
 var path = require('path');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-    contentBase: './app',
-    port: 8080
-  },
+  devtool: 'eval-source-map',
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
-    path.resolve(__dirname, 'app/main.jsx')
+    'webpack-hot-middleware/client?reload=true',
+    path.join(__dirname, 'app/main.js')
   ],
   output: {
-    path: __dirname + '/build',
-    publicPath: '/',
-    filename: './bundle.js'
-  },
-  module: {
-    loaders:[
-      { test: /\.css$/, include: path.resolve(__dirname, 'app'), loader: 'style-loader!css-loader' },
-      { test: /\.js[x]?$/, include: path.resolve(__dirname, 'app'), exclude: /node_modules/, loader: 'babel-loader' },
-    ]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
+    path: path.join(__dirname, '/dist/'),
+    filename: '[name].js',
+    publicPath: '/'
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'app/index.tpl.html',
+      inject: 'body',
+      filename: 'index.html'
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({ url: 'http://localhost:8080' })
-  ]
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ],
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+      query: {
+        "presets": ["es2015", "react", "stage-0", "react-hmre"]
+      }
+    }, {
+      test: /\.json?$/,
+      loader: 'json'
+    }, {
+      test: /\.css$/,
+      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+    }]
+  }
 };
