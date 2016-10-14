@@ -3,11 +3,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
+    'babel-polyfill',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -21,6 +23,7 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
+    new ExtractTextPlugin('[name].css'),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -42,6 +45,10 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+    }, {
+      test: /\.scss$/,
+      exclude: /node_modules/,
+      loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass")
     }]
   }
 };

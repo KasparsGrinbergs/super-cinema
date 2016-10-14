@@ -1,6 +1,7 @@
 /* eslint no-console: 0 */
 
 require("babel-register");
+
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -9,7 +10,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 const mongoose = require('mongoose');
 
-const movies_route = require('./app/routes/movies_route');
+const movies_route = require('./routes/movies_route');
 
 mongoose.connect("mongodb://localhost/");
 
@@ -57,6 +58,6 @@ db.once('open', function() {
     if (err) {
       console.log(err);
     }
-    console.info('==> 🌎 Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port);
+    console.info('==> Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port);
   });
 });

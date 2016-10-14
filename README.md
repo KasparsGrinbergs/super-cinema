@@ -9,10 +9,10 @@ or just export the files:
 
 `svn export https://github.com/kag17/super-cinema/trunk ./dir`
 
-1. cd super-cinema
-2. npm install
-3. Start Mongo: mongod --dbpath <your_projects_folder>/super-cinema/db
-4. npm start
+1. `cd super-cinema`
+2. `npm install`
+3. Start Mongo: `mongod --dbpath <your_projects_folder>/super-cinema/db`
+4. `npm start`
 5. navigate to http://localhost:3000 in your browser of choice.
 
 ### Prerequisites
